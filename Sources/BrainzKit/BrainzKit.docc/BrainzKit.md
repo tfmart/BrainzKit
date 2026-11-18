@@ -1,0 +1,99 @@
+# ``BrainzKit``
+
+Submit listens to ListenBrainz and read listening history, feedback, and statistics with Swift concurrency.
+
+## Overview
+
+BrainzKit wraps the [ListenBrainz API](https://listenbrainz.readthedocs.io/en/latest/users/api/index.html) in a single actor, ``BZKManager``. Every call is `async`, every model is `Sendable`, and the package builds with Swift 6 strict concurrency checking.
+
+```swift
+import BrainzKit
+
+let manager = BZKManager(
+    clientInfo: BZKClientInfo(name: "MyPlayer", version: "1.0", contact: "https://example.com")
+)
+
+try await manager.signIn(token: userToken)
+try await manager.submitListen(
+    BZKListenSubmission(artist: "Daft Punk", track: "One More Time", listenedAt: startDate)
+)
+```
+
+## Topics
+
+### Essentials
+
+- <doc:GettingStarted>
+- <doc:SubmittingListens>
+- ``BZKManager``
+- ``BZKClientInfo``
+
+### Submitting Listens
+
+- ``BZKManager/submitListen(_:)``
+- ``BZKManager/updatePlayingNow(_:)``
+- ``BZKManager/importListens(_:)``
+- ``BZKManager/clearPlayingNow(onlyIfSubmittedByThisClient:)``
+- ``BZKManager/deleteListen(listenedAt:recordingMSID:)``
+- ``BZKListenSubmission``
+
+### Reading Listens
+
+- ``BZKManager/listens(forUser:before:after:count:)``
+- ``BZKManager/listenCount(forUser:)``
+- ``BZKManager/playingNow(forUser:)``
+- ``BZKListens``
+- ``BZKListen``
+- ``BZKTrackMetadata``
+- ``BZKAdditionalInfo``
+- ``BZKMBIDMapping``
+- ``BZKArtistCredit``
+- ``BZKCoverArt``
+
+### Feedback
+
+- ``BZKManager/submitFeedback(_:for:)``
+- ``BZKManager/feedback(forUser:score:count:offset:includeMetadata:)``
+- ``BZKManager/feedback(forUser:recordings:)``
+- ``BZKFeedbackScore``
+- ``BZKRecordingIdentifier``
+- ``BZKFeedback``
+- ``BZKFeedbackPage``
+
+### Statistics
+
+- ``BZKManager/topArtists(for:range:count:offset:)``
+- ``BZKManager/topReleases(for:range:count:offset:)``
+- ``BZKManager/topReleaseGroups(for:range:count:offset:)``
+- ``BZKManager/topRecordings(for:range:count:offset:)``
+- ``BZKManager/listeningActivity(for:range:)``
+- ``BZKStatisticsScope``
+- ``BZKStatisticsRange``
+- ``BZKStatisticsPage``
+- ``BZKStatisticsEntity``
+- ``BZKArtistStatistic``
+- ``BZKReleaseStatistic``
+- ``BZKReleaseGroupStatistic``
+- ``BZKRecordingStatistic``
+- ``BZKListeningActivity``
+
+### Users
+
+- ``BZKManager/searchUsers(_:)``
+- ``BZKManager/similarUsers(toUser:)``
+- ``BZKManager/followers(ofUser:)``
+- ``BZKManager/following(ofUser:)``
+- ``BZKManager/follow(_:)``
+- ``BZKManager/unfollow(_:)``
+- ``BZKSimilarUser``
+
+### Metadata
+
+- ``BZKManager/lookupRecording(artist:track:release:)``
+- ``BZKRecordingMatch``
+
+### Networking and Errors
+
+- ``BZKHTTPClient``
+- ``BZKError``
+- ``BZKClientError``
