@@ -53,7 +53,7 @@ Users find their token on their [ListenBrainz settings page](https://listenbrain
 
 ## Documentation
 
-The DocC documentation covers every API and includes guides for getting started and submitting listens. In Xcode, choose Product > Build Documentation. From the command line:
+The [full documentation](https://tfmart.github.io/BrainzKit/documentation/brainzkit/) covers every API and includes guides for getting started and submitting listens. To build it locally, choose Product > Build Documentation in Xcode, or run:
 
 ```bash
 swift package --disable-sandbox preview-documentation --target BrainzKit
