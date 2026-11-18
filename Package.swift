@@ -19,6 +19,10 @@ let package = Package(
         )
     ],
     targets: [
-        .target(name: "BrainzKit")
+        .target(name: "BrainzKit"),
+        .testTarget(
+            name: "BrainzKitTests",
+            dependencies: ["BrainzKit"]
+        )
     ]
 )
