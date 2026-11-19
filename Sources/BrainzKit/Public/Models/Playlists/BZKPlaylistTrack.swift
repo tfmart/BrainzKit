@@ -9,10 +9,10 @@ import Foundation
 
 /// A track in a ListenBrainz playlist.
 public struct BZKPlaylistTrack: Sendable, Hashable, Decodable {
-    /// The track name.
-    public let title: String
-    /// The credited artist name.
-    public let artistName: String
+    /// The track name. `nil` when the playlist was fetched without track metadata.
+    public let title: String?
+    /// The credited artist name. `nil` when the playlist was fetched without track metadata.
+    public let artistName: String?
     /// The album name, if known.
     public let album: String?
     /// The track length in seconds, if known.
@@ -45,8 +45,8 @@ public struct BZKPlaylistTrack: Sendable, Hashable, Decodable {
 
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        title = try container.decode(String.self, forKey: .title)
-        artistName = try container.decodeIfPresent(String.self, forKey: .artistName) ?? ""
+        title = try container.decodeIfPresent(String.self, forKey: .title)
+        artistName = try container.decodeIfPresent(String.self, forKey: .artistName)
         album = try container.decodeIfPresent(String.self, forKey: .album)
         duration = try container.decodeIfPresent(Double.self, forKey: .duration).map { $0 / 1000 }
         let identifiers = (try? container.decodeIfPresent([String].self, forKey: .identifier))

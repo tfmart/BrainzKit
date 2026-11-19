@@ -77,4 +77,28 @@ import BrainzKit
         #expect(page.totalCount == 105)
         #expect(page.playlists.map(\.title) == ["Road Trip"])
     }
+
+    @Test func playlistWithoutTrackMetadataStillListsRecordings() async throws {
+        let server = FakeListenBrainz(body: """
+        {
+          "playlist": {
+            "identifier": "https://listenbrainz.org/playlist/abc",
+            "title": "Road Trip",
+            "creator": "rob",
+            "track": [
+              {
+                "identifier": ["https://musicbrainz.org/recording/273c17b3-9e39-4dd4-bea7-ecaad28202e7"],
+                "extension": {"https://musicbrainz.org/doc/jspf#track": {"added_by": "rob"}}
+              }
+            ]
+          }
+        }
+        """)
+
+        let playlist = try await server.manager(signedIn: false).playlist(id: "abc", includeTrackMetadata: false)
+
+        #expect(playlist.tracks.map(\.recordingMBID) == ["273c17b3-9e39-4dd4-bea7-ecaad28202e7"])
+        #expect(playlist.tracks.first?.title == nil)
+        #expect(try await server.lastRequest().url?.query == "fetch_metadata=false")
+    }
 }

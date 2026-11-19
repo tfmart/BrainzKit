@@ -73,11 +73,16 @@ public extension BZKManager {
 
     /// Fetches a playlist with its tracks.
     ///
-    /// - Parameter id: The playlist's MusicBrainz ID.
+    /// - Parameters:
+    ///   - id: The playlist's MusicBrainz ID.
+    ///   - includeTrackMetadata: Whether to include each track's artists and cover art. Turning this off makes the request faster.
     /// - Returns: The playlist.
     /// - Throws: ``BZKError`` with status 404 if the playlist doesn't exist or is private to another user.
-    func playlist(id: String) async throws -> BZKPlaylist {
-        let request = BZKRequest(path: "playlist/\(BZKRequest.segment(id))")
+    func playlist(id: String, includeTrackMetadata: Bool = true) async throws -> BZKPlaylist {
+        let request = BZKRequest(
+            path: "playlist/\(BZKRequest.segment(id))",
+            queryItems: includeTrackMetadata ? [] : BZKRequest.query(["fetch_metadata": "false"])
+        )
         let response: BZKPlaylistEnvelope = try await perform(request)
         return response.playlist
     }

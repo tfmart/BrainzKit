@@ -27,7 +27,7 @@ public struct BZKPlaylist: Sendable, Hashable, Decodable, Identifiable {
     public let createdAt: Date?
     /// When the playlist was last changed.
     public let lastModifiedAt: Date?
-    /// The playlist's tracks. Lists of playlists leave this empty; fetch a playlist with ``BZKManager/playlist(id:)`` to get its tracks.
+    /// The playlist's tracks. Lists of playlists leave this empty; fetch a playlist with ``BZKManager/playlist(id:includeTrackMetadata:)`` to get its tracks.
     public let tracks: [BZKPlaylistTrack]
     /// The playlist's page on listenbrainz.org.
     public var url: URL? {

@@ -74,7 +74,7 @@ try await manager.submitListen(
 
 ### Playlists
 
-- ``BZKManager/playlist(id:)``
+- ``BZKManager/playlist(id:includeTrackMetadata:)``
 - ``BZKManager/playlists(forUser:count:offset:)``
 - ``BZKManager/playlists(createdFor:count:offset:)``
 - ``BZKManager/collaborativePlaylists(forUser:count:offset:)``
