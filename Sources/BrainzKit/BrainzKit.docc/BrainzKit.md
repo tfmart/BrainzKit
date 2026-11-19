@@ -72,6 +72,18 @@ try await manager.submitListen(
 - ``BZKPinnedRecording``
 - ``BZKPinnedRecordingPage``
 
+### Playlists
+
+- ``BZKManager/playlist(id:)``
+- ``BZKManager/playlists(forUser:count:offset:)``
+- ``BZKManager/playlists(createdFor:count:offset:)``
+- ``BZKManager/collaborativePlaylists(forUser:count:offset:)``
+- ``BZKManager/recommendedPlaylists(forUser:)``
+- ``BZKManager/searchPlaylists(_:forUser:count:offset:)``
+- ``BZKPlaylist``
+- ``BZKPlaylistTrack``
+- ``BZKPlaylistPage``
+
 ### Statistics
 
 - ``BZKManager/topArtists(for:range:count:offset:)``
