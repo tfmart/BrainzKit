@@ -100,6 +100,19 @@ try await manager.submitListen(
 - ``BZKReleaseGroupStatistic``
 - ``BZKRecordingStatistic``
 - ``BZKListeningActivity``
+- ``BZKManager/hourlyActivity(forUser:range:)``
+- ``BZKManager/artistCountries(for:range:)``
+- ``BZKManager/yearInMusic(forUser:year:)``
+- ``BZKManager/topListeners(ofArtist:range:)``
+- ``BZKManager/topListeners(ofReleaseGroup:range:)``
+- ``BZKManager/similarity(ofUser:to:)``
+- ``BZKHourlyActivity``
+- ``BZKWeekday``
+- ``BZKCountryStatistic``
+- ``BZKYearInMusic``
+- ``BZKGenreShare``
+- ``BZKTopListeners``
+- ``BZKListener``
 
 ### Popularity
 
