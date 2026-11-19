@@ -44,6 +44,52 @@ public extension BZKManager {
         try await feed(path: "feed/events/listens/similar", before: before, after: after, count: count)
     }
 
+    /// Fetches one event from the signed-in user's feed.
+    ///
+    /// - Parameter id: The event's ID.
+    /// - Returns: The event.
+    /// - Throws: ``BZKClientError/missingToken`` if no user is signed in, or ``BZKError`` with status 404 if no event has that ID.
+    func feedEvent(id: Int) async throws -> BZKFeedEvent {
+        let request = try BZKRequest(path: "\(signedInUserPath())/feed/events/\(id)")
+        let response: BZKPayloadResponse<BZKFeedEventList> = try await perform(request)
+        guard let event = response.payload.events.first else { throw BZKClientError.invalidResponse }
+        return event
+    }
+
+    /// Thanks a followed user for one of their recommendations or pins.
+    ///
+    /// - Parameters:
+    ///   - id: The event's ID.
+    ///   - kind: The event's kind: ``BZKFeedEventKind/recordingRecommendation``, ``BZKFeedEventKind/personalRecommendation``, or ``BZKFeedEventKind/pin``.
+    ///   - message: A message to send with the thanks.
+    /// - Throws: ``BZKClientError/missingToken`` if no user is signed in, or ``BZKError`` if the signed-in user doesn't follow the event's author.
+    func thankFeedEvent(id: Int, kind: BZKFeedEventKind, message: String? = nil) async throws {
+        let body = BZKThanksBody(metadata: BZKThanksMetadata(originalEventType: kind, originalEventID: id, blurb: message))
+        let request = try BZKRequest(method: .post, path: "\(signedInUserPath())/timeline-event/create/thanks", body: encode(body))
+        try await send(request)
+    }
+
+    /// Posts a message to a user's feed.
+    ///
+    /// Only accounts ListenBrainz has approved, such as its own bots, can post notifications.
+    ///
+    /// - Parameters:
+    ///   - message: The message, which may contain HTML links.
+    ///   - userName: The user whose feed shows the message.
+    /// - Returns: The new event's ID.
+    /// - Throws: ``BZKClientError/missingToken`` if no user is signed in, or ``BZKError`` with status 403 if the signed-in account isn't approved.
+    @discardableResult
+    func postNotification(_ message: String, toUser userName: String) async throws -> Int {
+        let request = try BZKRequest(
+            method: .post,
+            path: "user/\(BZKRequest.segment(userName))/timeline-event/create/notification",
+            body: encode(BZKNotificationBody(metadata: ["message": message])),
+            token: requiredToken()
+        )
+        let response: BZKCreatedEvent = try await perform(request)
+        return response.id
+    }
+
     /// Recommends a recording to everyone who follows the signed-in user.
     ///
     /// - Parameter recording: The recording to recommend.

@@ -33,6 +33,17 @@ public extension BZKManager {
         return response.pin
     }
 
+    /// Fetches a pin by its ID.
+    ///
+    /// - Parameter id: The pin's ``BZKPinnedRecording/id``.
+    /// - Returns: The pin.
+    /// - Throws: ``BZKError`` with status 404 if no pin has that ID.
+    func pin(id: Int) async throws -> BZKPinnedRecording {
+        let response: BZKPinnedRecordingResponse = try await perform(BZKRequest(path: "pin/\(id)"))
+        guard let pin = response.pin else { throw BZKClientError.invalidResponse }
+        return pin
+    }
+
     /// Fetches recent pins from the users a user follows.
     ///
     /// - Parameters:

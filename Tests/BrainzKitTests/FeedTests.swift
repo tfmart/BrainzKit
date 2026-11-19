@@ -63,4 +63,15 @@ import BrainzKit
         #expect(deleteBody["event_type"] as? String == "recording_recommendation")
         #expect(deleteBody["id"] as? Int == 7)
     }
+
+    @Test func thankingReferencesTheOriginalEvent() async throws {
+        let server = FakeListenBrainz()
+
+        try await server.manager().thankFeedEvent(id: 12, kind: .pin, message: "Great pick")
+
+        let metadata = try #require(try await server.lastJSONBody()["metadata"] as? [String: Any])
+        #expect(metadata["original_event_type"] as? String == "recording_pin")
+        #expect(metadata["original_event_id"] as? Int == 12)
+        #expect(metadata["blurb_content"] as? String == "Great pick")
+    }
 }

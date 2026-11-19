@@ -93,6 +93,7 @@ try await manager.submitListen(
 
 - ``BZKManager/pins(forUser:count:offset:)``
 - ``BZKManager/currentPin(forUser:)``
+- ``BZKManager/pin(id:)``
 - ``BZKManager/pinsFromFollowing(forUser:count:offset:)``
 - ``BZKManager/pin(_:blurb:until:)``
 - ``BZKManager/updatePin(id:blurb:)``
@@ -123,6 +124,7 @@ try await manager.submitListen(
 ### Feed
 
 - ``BZKManager/feedEvents(before:after:count:)``
+- ``BZKManager/feedEvent(id:)``
 - ``BZKManager/feedListensFromFollowing(before:after:count:)``
 - ``BZKManager/feedListensFromSimilarUsers(before:after:count:)``
 - ``BZKManager/recommendToFollowers(_:)``
@@ -131,6 +133,8 @@ try await manager.submitListen(
 - ``BZKManager/hideFeedEvent(id:kind:)``
 - ``BZKManager/unhideFeedEvent(id:kind:)``
 - ``BZKManager/deleteFeedEvent(id:kind:)``
+- ``BZKManager/thankFeedEvent(id:kind:message:)``
+- ``BZKManager/postNotification(_:toUser:)``
 - ``BZKFeedEvent``
 - ``BZKFeedEventKind``
 - ``BZKFeedEventContent``
