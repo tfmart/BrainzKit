@@ -238,6 +238,9 @@ try await manager.submitListen(
 - ``BZKManager/coverArtGridURL(forUser:range:dimension:layout:size:)``
 - ``BZKManager/yearInMusicArtURL(_:forUser:year:)``
 - ``BZKManager/coverArtGrid(releaseMBIDs:dimension:layout:size:background:showCaptions:)``
+- ``BZKManager/artistCoverArtGridURL(forArtist:dimension:layout:size:)``
+- ``BZKManager/playlistPreviewImageURL(forPlaylist:)``
+- ``BZKManager/playlistCoverArt(forPlaylist:dimension:layout:)``
 - ``BZKStatsArtDesign``
 - ``BZKYearInMusicArt``
 - ``BZKArtBackground``

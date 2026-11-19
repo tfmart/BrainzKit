@@ -33,6 +33,26 @@ public extension BZKManager {
         URL(string: Self.baseURL + "art/grid-stats/\(BZKRequest.segment(userName))/\(range.rawValue)/\(dimension)/\(layout)/\(size)")
     }
 
+    /// The URL of an SVG grid of an artist's most listened album covers.
+    ///
+    /// - Parameters:
+    ///   - artistMBID: The MusicBrainz artist ID.
+    ///   - dimension: The number of covers per row, from 2 to 5.
+    ///   - layout: The tile layout for the dimension. Layout 0 is a plain grid; others give some covers more space.
+    ///   - size: The image's edge length in pixels.
+    /// - Returns: The image URL.
+    nonisolated func artistCoverArtGridURL(forArtist artistMBID: String, dimension: Int = 3, layout: Int = 0, size: Int = 750) -> URL? {
+        URL(string: Self.baseURL + "art/artist-grid/\(BZKRequest.segment(artistMBID))/\(dimension)/\(layout)/\(size)")
+    }
+
+    /// The URL of a PNG preview image for a playlist, as shown when sharing it on social media.
+    ///
+    /// - Parameter playlistID: The playlist's ID.
+    /// - Returns: The image URL. Playlists without cover art redirect to a generic ListenBrainz image.
+    nonisolated func playlistPreviewImageURL(forPlaylist playlistID: String) -> URL? {
+        URL(string: Self.baseURL + "art/playlist/\(BZKRequest.segment(playlistID))/opengraph/")
+    }
+
     /// The URL of a shareable SVG image from a user's Year in Music.
     ///
     /// - Parameters:
@@ -74,5 +94,22 @@ public extension BZKManager {
             caption: showCaptions
         )
         return try await send(BZKRequest(method: .post, path: "art/grid/", body: encode(body)))
+    }
+
+    /// Creates an SVG grid of a playlist's album covers.
+    ///
+    /// - Parameters:
+    ///   - playlistID: The playlist's ID.
+    ///   - dimension: The number of covers per row, from 2 to 5.
+    ///   - layout: The tile layout for the dimension. Layout 0 is a plain grid; others give some covers more space.
+    /// - Returns: The SVG image data.
+    /// - Throws: ``BZKClientError/missingToken`` if no user is signed in, or ``BZKError`` if the grid options are invalid or the user can't see the playlist.
+    func playlistCoverArt(forPlaylist playlistID: String, dimension: Int = 3, layout: Int = 0) async throws -> Data {
+        let request = try BZKRequest(
+            method: .post,
+            path: "art/playlist/\(BZKRequest.segment(playlistID))/\(dimension)/\(layout)",
+            token: requiredToken()
+        )
+        return try await send(request)
     }
 }
