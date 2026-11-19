@@ -10,6 +10,7 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 - Pin a recording to a profile, and read pins from a user or the people they follow
 - Browse and search playlists, including the ones ListenBrainz generates for each user
 - Top artists, releases, albums, and recordings, plus listening activity, for a user or the whole site
+- Listen and listener counts for any artist, recording, or album, and an artist's most played tracks and albums
 - Search, follow, and find similar users
 - Match artist and track names to MusicBrainz recordings
 

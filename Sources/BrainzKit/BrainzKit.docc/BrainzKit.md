@@ -101,6 +101,18 @@ try await manager.submitListen(
 - ``BZKRecordingStatistic``
 - ``BZKListeningActivity``
 
+### Popularity
+
+- ``BZKManager/popularity(ofRecordings:)``
+- ``BZKManager/popularity(ofArtists:)``
+- ``BZKManager/popularity(ofReleases:)``
+- ``BZKManager/popularity(ofReleaseGroups:)``
+- ``BZKManager/topRecordings(forArtist:)``
+- ``BZKManager/topReleaseGroups(forArtist:)``
+- ``BZKPopularity``
+- ``BZKArtistTopRecording``
+- ``BZKArtistTopReleaseGroup``
+
 ### Users
 
 - ``BZKManager/searchUsers(_:)``
