@@ -12,7 +12,7 @@ public extension BZKManager {
     ///
     /// - Parameters:
     ///   - userName: The ListenBrainz user name.
-    ///   - count: The number of pins to return, up to 100.
+    ///   - count: The number of pins to return, up to 1000.
     ///   - offset: The number of pins to skip.
     /// - Returns: A page of pins, newest first.
     func pins(forUser userName: String, count: Int = 25, offset: Int = 0) async throws -> BZKPinnedRecordingPage {
@@ -37,7 +37,7 @@ public extension BZKManager {
     ///
     /// - Parameters:
     ///   - userName: The ListenBrainz user name.
-    ///   - count: The number of pins to return, up to 100.
+    ///   - count: The number of pins to return, up to 1000.
     ///   - offset: The number of pins to skip.
     /// - Returns: Pins from followed users, newest first. Each pin's ``BZKPinnedRecording/userName`` names who pinned it.
     func pinsFromFollowing(forUser userName: String, count: Int = 25, offset: Int = 0) async throws -> [BZKPinnedRecording] {
