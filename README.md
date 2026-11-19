@@ -17,6 +17,7 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 - Search, follow, and find similar users
 - Read a user's feed, recommend tracks to followers, and post CritiqueBrainz reviews
 - Match artist and track names to MusicBrainz recordings, and fix wrong matches
+- Export a user's data as a ZIP archive, and track import progress from other services
 - Genres, tags, release details, and streaming links for recordings, artists, and albums
 
 ## Requirements

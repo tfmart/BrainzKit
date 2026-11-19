@@ -204,6 +204,19 @@ try await manager.submitListen(
 - ``BZKTag``
 - ``BZKLink``
 
+### Account
+
+- ``BZKManager/startDataExport(from:to:)``
+- ``BZKManager/dataExports()``
+- ``BZKManager/dataExport(id:)``
+- ``BZKManager/downloadDataExport(id:)``
+- ``BZKManager/deleteDataExport(id:)``
+- ``BZKManager/connectedServices()``
+- ``BZKManager/latestImport(forUser:service:)``
+- ``BZKManager/setLatestImport(_:service:)``
+- ``BZKDataExport``
+- ``BZKDataExportStatus``
+
 ### Networking and Errors
 
 - ``BZKHTTPClient``
