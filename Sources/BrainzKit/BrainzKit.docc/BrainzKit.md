@@ -73,6 +73,21 @@ try await manager.submitListen(
 - ``BZKRecommendationFeedback``
 - ``BZKRecommendationFeedbackPage``
 
+### Explore
+
+- ``BZKManager/freshReleases(days:around:sort:includePast:includeFuture:)``
+- ``BZKManager/releases(matchingColor:count:)``
+- ``BZKManager/radio(prompt:mode:)``
+- ``BZKManager/radioRecordings(forArtist:mode:maxSimilarArtists:maxRecordingsPerArtist:popularity:)``
+- ``BZKManager/radioRecordings(forTags:matchAll:popularity:count:)``
+- ``BZKFreshRelease``
+- ``BZKFreshReleaseSort``
+- ``BZKColorRelease``
+- ``BZKRadioMode``
+- ``BZKRadioPlaylist``
+- ``BZKArtistRadioRecording``
+- ``BZKTagRadioRecording``
+
 ### Pins
 
 - ``BZKManager/pins(forUser:count:offset:)``
