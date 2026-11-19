@@ -60,6 +60,18 @@ try await manager.submitListen(
 - ``BZKFeedback``
 - ``BZKFeedbackPage``
 
+### Pins
+
+- ``BZKManager/pins(forUser:count:offset:)``
+- ``BZKManager/currentPin(forUser:)``
+- ``BZKManager/pinsFromFollowing(forUser:count:offset:)``
+- ``BZKManager/pin(_:blurb:until:)``
+- ``BZKManager/updatePin(id:blurb:)``
+- ``BZKManager/unpin()``
+- ``BZKManager/deletePin(id:)``
+- ``BZKPinnedRecording``
+- ``BZKPinnedRecordingPage``
+
 ### Statistics
 
 - ``BZKManager/topArtists(for:range:count:offset:)``
