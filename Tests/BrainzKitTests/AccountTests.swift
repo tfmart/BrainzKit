@@ -17,4 +17,12 @@ import BrainzKit
 
         #expect(latest == nil)
     }
+
+    @Test func dumpReportsWhenItWasCreated() async throws {
+        let server = FakeListenBrainz(body: #"{"id": 2797, "dump_type": "incremental", "timestamp": "20261119-000003"}"#)
+
+        let dump = try await server.manager(signedIn: false).dump()
+
+        #expect(dump.createdAt == Date(timeIntervalSince1970: 1795046403))
+    }
 }

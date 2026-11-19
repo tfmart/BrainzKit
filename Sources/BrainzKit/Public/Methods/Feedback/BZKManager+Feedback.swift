@@ -75,4 +75,34 @@ public extension BZKManager {
         let response: BZKFeedbackList = try await perform(request)
         return response.feedback
     }
+
+    /// Fetches the feedback every user has given a recording.
+    ///
+    /// - Parameters:
+    ///   - recording: The recording.
+    ///   - score: Only return feedback with this score. When `nil`, loves and hates are both returned.
+    ///   - count: The number of items to return.
+    ///   - offset: The number of items to skip.
+    /// - Returns: A page of feedback, each with the ``BZKFeedback/userName`` of who gave it.
+    func feedback(
+        forRecording recording: BZKRecordingIdentifier,
+        score: BZKFeedbackScore? = nil,
+        count: Int = 25,
+        offset: Int = 0
+    ) async throws -> BZKFeedbackPage {
+        let path: String
+        switch recording {
+        case .mbid(let mbid): path = "feedback/recording/\(BZKRequest.segment(mbid))/get-feedback-mbid"
+        case .msid(let msid): path = "feedback/recording/\(BZKRequest.segment(msid))/get-feedback"
+        }
+        let request = BZKRequest(
+            path: path,
+            queryItems: BZKRequest.query([
+                "score": score.map { String($0.rawValue) },
+                "count": String(count),
+                "offset": String(offset)
+            ])
+        )
+        return try await perform(request)
+    }
 }

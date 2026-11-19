@@ -55,6 +55,7 @@ try await manager.submitListen(
 - ``BZKManager/submitFeedback(_:for:)``
 - ``BZKManager/feedback(forUser:score:count:offset:includeMetadata:)``
 - ``BZKManager/feedback(forUser:recordings:)``
+- ``BZKManager/feedback(forRecording:score:count:offset:)``
 - ``BZKFeedbackScore``
 - ``BZKRecordingIdentifier``
 - ``BZKFeedback``
@@ -204,6 +205,16 @@ try await manager.submitListen(
 - ``BZKTag``
 - ``BZKLink``
 
+### Shareable Images
+
+- ``BZKManager/statsArtURL(_:forUser:range:size:)``
+- ``BZKManager/coverArtGridURL(forUser:range:dimension:layout:size:)``
+- ``BZKManager/yearInMusicArtURL(_:forUser:year:)``
+- ``BZKManager/coverArtGrid(releaseMBIDs:dimension:layout:size:background:showCaptions:)``
+- ``BZKStatsArtDesign``
+- ``BZKYearInMusicArt``
+- ``BZKArtBackground``
+
 ### Account
 
 - ``BZKManager/startDataExport(from:to:)``
@@ -216,6 +227,8 @@ try await manager.submitListen(
 - ``BZKManager/setLatestImport(_:service:)``
 - ``BZKDataExport``
 - ``BZKDataExportStatus``
+- ``BZKManager/dump(id:)``
+- ``BZKDump``
 
 ### Networking and Errors
 
