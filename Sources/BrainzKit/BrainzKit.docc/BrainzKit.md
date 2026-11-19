@@ -127,6 +127,17 @@ try await manager.submitListen(
 
 - ``BZKManager/lookupRecording(artist:track:release:)``
 - ``BZKRecordingMatch``
+- ``BZKManager/recordingMetadata(for:)``
+- ``BZKManager/artistMetadata(for:)``
+- ``BZKManager/releaseGroupMetadata(for:)``
+- ``BZKManager/linkRecording(msid:toMBID:)``
+- ``BZKManager/linkedRecording(forMSID:)``
+- ``BZKRecordingMetadata``
+- ``BZKArtistMetadata``
+- ``BZKReleaseGroupMetadata``
+- ``BZKMetadataRelease``
+- ``BZKTag``
+- ``BZKLink``
 
 ### Networking and Errors
 

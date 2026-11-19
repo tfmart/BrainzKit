@@ -12,7 +12,8 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 - Top artists, releases, albums, and recordings, plus listening activity, for a user or the whole site
 - Listen and listener counts for any artist, recording, or album, and an artist's most played tracks and albums
 - Search, follow, and find similar users
-- Match artist and track names to MusicBrainz recordings
+- Match artist and track names to MusicBrainz recordings, and fix wrong matches
+- Genres, tags, release details, and streaming links for recordings, artists, and albums
 
 ## Requirements
 
