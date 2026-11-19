@@ -60,6 +60,19 @@ try await manager.submitListen(
 - ``BZKFeedback``
 - ``BZKFeedbackPage``
 
+### Recommendations
+
+- ``BZKManager/recommendedRecordings(forUser:count:offset:)``
+- ``BZKManager/rateRecommendation(_:recordingMBID:)``
+- ``BZKManager/removeRecommendationRating(recordingMBID:)``
+- ``BZKManager/recommendationRatings(forUser:rating:count:offset:)``
+- ``BZKManager/recommendationRatings(forUser:recordingMBIDs:)``
+- ``BZKRecommendationPage``
+- ``BZKRecommendedRecording``
+- ``BZKRecommendationRating``
+- ``BZKRecommendationFeedback``
+- ``BZKRecommendationFeedbackPage``
+
 ### Pins
 
 - ``BZKManager/pins(forUser:count:offset:)``

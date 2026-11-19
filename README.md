@@ -7,6 +7,7 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 - Submit listens, now playing updates, and offline imports
 - Read a user's listens, listen count, and now playing track
 - Love and hate recordings, and read feedback
+- Personalized track recommendations, and ratings that tune them
 - Pin a recording to a profile, and read pins from a user or the people they follow
 - Browse, search, create, and edit playlists, including the ones ListenBrainz generates for each user
 - Top artists, releases, albums, and recordings, listening activity, listening heatmaps, and artist countries, for a user or the whole site
