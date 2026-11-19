@@ -62,4 +62,22 @@ import BrainzKit
         #expect(summary.similarUsers.map(\.userName) == ["bob", "alice"])
         #expect(summary.topArtists.isEmpty)
     }
+
+    @Test func artistEvolutionLabelsNumericAndNamedPeriods() async throws {
+        let server = FakeListenBrainz(body: """
+        {
+          "payload": {
+            "artist_evolution_activity": [
+              {"artist_name": "Air", "listen_count": 3, "time_unit": 31},
+              {"artist_name": "Air", "listen_count": 5, "time_unit": "September"}
+            ],
+            "range": "month"
+          }
+        }
+        """)
+
+        let rows = try await server.manager(signedIn: false).artistEvolution(for: .sitewide, range: .month)
+
+        #expect(rows.map(\.period) == ["31", "September"])
+    }
 }

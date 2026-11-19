@@ -12,7 +12,7 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 - Pin a recording to a profile, and read pins from a user or the people they follow
 - Browse, search, create, and edit playlists, including the ones ListenBrainz generates for each user
 - Top artists, releases, albums, and recordings, listening activity, listening heatmaps, and artist countries, for a user or the whole site
-- Year in Music summaries, an artist's or album's top listeners, and how similar two users' tastes are
+- Year in Music summaries, listens by album, release era, genre and hour, artist trends over time, an artist's or album's top listeners, and how similar two users' tastes are
 - Shareable SVG images: top artist and album designs, cover art grids, and Year in Music cards
 - Listen and listener counts for any artist, recording, or album, and an artist's most played tracks and albums
 - Search, follow, and find similar users

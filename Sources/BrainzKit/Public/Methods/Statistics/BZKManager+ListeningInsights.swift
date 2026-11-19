@@ -41,12 +41,74 @@ public extension BZKManager {
     ///
     /// - Parameters:
     ///   - userName: The ListenBrainz user name.
-    ///   - year: The year to summarize.
+    ///   - year: The year to summarize. When `nil`, the latest Year in Music is returned.
     /// - Returns: The summary. Fields ListenBrainz didn't calculate for that year are `nil` or empty.
-    func yearInMusic(forUser userName: String, year: Int) async throws -> BZKYearInMusic {
-        let request = BZKRequest(path: "stats/user/\(BZKRequest.segment(userName))/year-in-music/\(year)")
+    func yearInMusic(forUser userName: String, year: Int? = nil) async throws -> BZKYearInMusic {
+        let path = "stats/user/\(BZKRequest.segment(userName))/year-in-music" + (year.map { "/\($0)" } ?? "")
+        let response: BZKPayloadResponse<BZKYearInMusic> = try await perform(BZKRequest(path: path))
+        return response.payload
+    }
+
+    /// Fetches a Year in Music summary as it was originally published, for 2021 through 2024.
+    ///
+    /// These archived summaries have release-level top lists instead of release groups, so ``BZKYearInMusic/topReleaseGroups`` is empty.
+    ///
+    /// - Parameters:
+    ///   - userName: The ListenBrainz user name.
+    ///   - year: The year to summarize, from 2021 to 2024.
+    /// - Returns: The archived summary.
+    func archivedYearInMusic(forUser userName: String, year: Int) async throws -> BZKYearInMusic {
+        let request = BZKRequest(path: "stats/user/\(BZKRequest.segment(userName))/year-in-music/legacy/\(year)")
         let response: BZKPayloadResponse<BZKYearInMusic> = try await perform(request)
         return response.payload
+    }
+
+    /// Fetches the most listened artists with their listens broken down by album.
+    ///
+    /// - Parameters:
+    ///   - scope: A user or the whole site.
+    ///   - range: The time range.
+    /// - Returns: Artists, most listened first.
+    /// - Throws: ``BZKClientError/noContent`` if ListenBrainz has not calculated these statistics yet.
+    func artistActivity(for scope: BZKStatisticsScope, range: BZKStatisticsRange = .allTime) async throws -> [BZKArtistActivity] {
+        let response: BZKPayloadResponse<BZKArtistActivityPayload> = try await perform(statisticsRequest(scope, "artist-activity", range))
+        return response.payload.artistActivity.sorted { $0.listenCount > $1.listenCount }
+    }
+
+    /// Fetches listens per artist per period, for charting how listening to artists changes over time.
+    ///
+    /// - Parameters:
+    ///   - scope: A user or the whole site.
+    ///   - range: The time range. It decides the periods: weekdays for a week, days for a month, months for a year, and years for all time.
+    /// - Returns: One entry per artist and period.
+    /// - Throws: ``BZKClientError/noContent`` if ListenBrainz has not calculated these statistics yet.
+    func artistEvolution(for scope: BZKStatisticsScope, range: BZKStatisticsRange = .allTime) async throws -> [BZKArtistEvolution] {
+        let response: BZKPayloadResponse<BZKArtistEvolutionPayload> = try await perform(statisticsRequest(scope, "artist-evolution-activity", range))
+        return response.payload.artistEvolution
+    }
+
+    /// Fetches how many listens went to music released in each year.
+    ///
+    /// - Parameters:
+    ///   - scope: A user or the whole site.
+    ///   - range: The time range.
+    /// - Returns: One entry per release year, oldest first.
+    /// - Throws: ``BZKClientError/noContent`` if ListenBrainz has not calculated these statistics yet.
+    func eraActivity(for scope: BZKStatisticsScope, range: BZKStatisticsRange = .allTime) async throws -> [BZKEraActivity] {
+        let response: BZKPayloadResponse<BZKEraActivityPayload> = try await perform(statisticsRequest(scope, "era-activity", range))
+        return response.payload.eraActivity.sorted { $0.year < $1.year }
+    }
+
+    /// Fetches how many listens a user has for each genre in each hour of the day.
+    ///
+    /// - Parameters:
+    ///   - userName: The ListenBrainz user name.
+    ///   - range: The time range.
+    /// - Returns: One entry per genre and hour. Hours are in UTC.
+    /// - Throws: ``BZKClientError/noContent`` if ListenBrainz has not calculated these statistics yet.
+    func genreActivity(forUser userName: String, range: BZKStatisticsRange = .allTime) async throws -> [BZKGenreActivity] {
+        let response: BZKPayloadResponse<BZKGenreActivityPayload> = try await perform(statisticsRequest(.user(userName), "genre-activity", range))
+        return response.payload.genreActivity
     }
 
     /// Fetches the users who listened to an artist the most.
@@ -89,6 +151,10 @@ public extension BZKManager {
 }
 
 extension BZKManager {
+    func statisticsRequest(_ scope: BZKStatisticsScope, _ endpoint: String, _ range: BZKStatisticsRange) -> BZKRequest {
+        BZKRequest(path: "\(scope.path)/\(endpoint)", queryItems: BZKRequest.query(["range": range.rawValue]))
+    }
+
     func topListeners(path: String, range: BZKStatisticsRange) async throws -> BZKTopListeners {
         let request = BZKRequest(path: path, queryItems: BZKRequest.query(["range": range.rawValue]))
         let response: BZKPayloadResponse<BZKTopListeners> = try await perform(request)

@@ -156,6 +156,11 @@ try await manager.submitListen(
 - ``BZKManager/hourlyActivity(forUser:range:)``
 - ``BZKManager/artistCountries(for:range:)``
 - ``BZKManager/yearInMusic(forUser:year:)``
+- ``BZKManager/archivedYearInMusic(forUser:year:)``
+- ``BZKManager/artistActivity(for:range:)``
+- ``BZKManager/artistEvolution(for:range:)``
+- ``BZKManager/eraActivity(for:range:)``
+- ``BZKManager/genreActivity(forUser:range:)``
 - ``BZKManager/topListeners(ofArtist:range:)``
 - ``BZKManager/topListeners(ofReleaseGroup:range:)``
 - ``BZKManager/similarity(ofUser:to:)``
@@ -166,6 +171,11 @@ try await manager.submitListen(
 - ``BZKGenreShare``
 - ``BZKTopListeners``
 - ``BZKListener``
+- ``BZKArtistActivity``
+- ``BZKArtistActivityAlbum``
+- ``BZKArtistEvolution``
+- ``BZKEraActivity``
+- ``BZKGenreActivity``
 
 ### Popularity
 
