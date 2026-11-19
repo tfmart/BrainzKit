@@ -56,6 +56,9 @@ try await manager.submitListen(
 - ``BZKManager/feedback(forUser:score:count:offset:includeMetadata:)``
 - ``BZKManager/feedback(forUser:recordings:)``
 - ``BZKManager/feedback(forRecording:score:count:offset:)``
+- ``BZKManager/importLovedTracks(from:)``
+- ``BZKFeedbackImportSource``
+- ``BZKFeedbackImportResult``
 - ``BZKFeedbackScore``
 - ``BZKRecordingIdentifier``
 - ``BZKFeedback``
@@ -207,6 +210,8 @@ try await manager.submitListen(
 ### Metadata
 
 - ``BZKManager/lookupRecording(artist:track:release:)``
+- ``BZKManager/lookupRecordings(_:)``
+- ``BZKRecordingQuery``
 - ``BZKRecordingMatch``
 - ``BZKManager/recordingMetadata(for:)``
 - ``BZKManager/artistMetadata(for:)``

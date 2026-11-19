@@ -88,4 +88,22 @@ import BrainzKit
 
         #expect(linked == nil)
     }
+
+    @Test func batchLookupKeepsQueryOrderIncludingMisses() async throws {
+        let server = FakeListenBrainz(body: """
+        [
+          {"index": 1, "artist_name_arg": "Nobody", "recording_name_arg": "Nothing"},
+          {"index": 0, "artist_credit_name": "Air", "artist_mbids": ["cb67438a-7f50-4f2b-a6f1-2bb2729fd538"], "recording_mbid": "738920d3-c6e6-41c7-b504-57761bb625fd", "recording_name": "Sexy Boy"},
+          {"index": 2, "artist_credit_name": "Daft Punk", "artist_mbids": ["056e4f3e-d505-4dad-8ec1-d04f521cbb56"], "recording_mbid": "60fa767a-d85d-4991-82bc-4294e0b11ae7", "recording_name": "One More Time"}
+        ]
+        """)
+
+        let matches = try await server.manager().lookupRecordings([
+            BZKRecordingQuery(artist: "Air", track: "Sexy Boy"),
+            BZKRecordingQuery(artist: "Nobody", track: "Nothing"),
+            BZKRecordingQuery(artist: "Daft Punk", track: "One More Time")
+        ])
+
+        #expect(matches.map { $0?.recordingName } == ["Sexy Boy", nil, "One More Time"])
+    }
 }

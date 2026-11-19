@@ -65,12 +65,10 @@ public extension BZKManager {
             case .msid(let msid): msids.append(msid)
             }
         }
-        let request = BZKRequest(
+        let request = try BZKRequest(
+            method: .post,
             path: "feedback/user/\(BZKRequest.segment(userName))/get-feedback-for-recordings",
-            queryItems: BZKRequest.query([
-                "recording_mbids": mbids.isEmpty ? nil : mbids.joined(separator: ","),
-                "recording_msids": msids.isEmpty ? nil : msids.joined(separator: ",")
-            ])
+            body: encode(BZKFeedbackLookupBody(recordingMBIDs: mbids, recordingMSIDs: msids))
         )
         let response: BZKFeedbackList = try await perform(request)
         return response.feedback
@@ -103,6 +101,17 @@ public extension BZKManager {
                 "offset": String(offset)
             ])
         )
+        return try await perform(request)
+    }
+
+    /// Imports loved tracks from another service as loved recordings for the signed-in user.
+    ///
+    /// - Parameter source: The service and account to import from.
+    /// - Returns: How many tracks were found and imported.
+    /// - Throws: ``BZKClientError/missingToken`` if no user is signed in, or ``BZKError`` if the account can't be read, such as a Navidrome server that isn't connected.
+    @discardableResult
+    func importLovedTracks(from source: BZKFeedbackImportSource) async throws -> BZKFeedbackImportResult {
+        let request = try BZKRequest(method: .post, path: "feedback/import", body: encode(BZKFeedbackImportBody(source: source)), token: requiredToken())
         return try await perform(request)
     }
 }

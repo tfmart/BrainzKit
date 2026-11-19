@@ -6,7 +6,7 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 
 - Submit listens, now playing updates, and offline imports
 - Read a user's listens, listen count, and now playing track
-- Love and hate recordings, and read feedback
+- Love and hate recordings, read feedback, and import loved tracks from Last.fm, Libre.fm, or Navidrome
 - Personalized track recommendations, and ratings that tune them
 - Fresh releases (sitewide or from artists a user listens to), releases by cover art color, and LB Radio playlists from prompts like `artist:(Daft Punk)`
 - Pin a recording to a profile, and read pins from a user or the people they follow

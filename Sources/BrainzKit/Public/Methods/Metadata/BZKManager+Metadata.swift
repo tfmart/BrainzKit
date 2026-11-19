@@ -32,6 +32,28 @@ public extension BZKManager {
         return response.match
     }
 
+    /// Finds the MusicBrainz recordings for several artist and track names at once.
+    ///
+    /// - Parameter queries: The tracks to match. Any number can be looked up at once.
+    /// - Returns: The best match for each query, in the same order, or `nil` where ListenBrainz found none.
+    /// - Throws: ``BZKClientError/missingToken`` if no user is signed in.
+    func lookupRecordings(_ queries: [BZKRecordingQuery]) async throws -> [BZKRecordingMatch?] {
+        let token = try requiredToken()
+        var matches: [BZKRecordingMatch?] = []
+        let batchSize = 50
+        for start in stride(from: 0, to: queries.count, by: batchSize) {
+            let batch = Array(queries[start..<min(start + batchSize, queries.count)])
+            let request = try BZKRequest(method: .post, path: "metadata/lookup/", body: encode(BZKBatchLookupBody(recordings: batch)), token: token)
+            let results: [BZKBatchLookupResult] = try await perform(request)
+            var batchMatches = [BZKRecordingMatch?](repeating: nil, count: batch.count)
+            for result in results where batchMatches.indices.contains(result.index) {
+                batchMatches[result.index] = result.match
+            }
+            matches += batchMatches
+        }
+        return matches
+    }
+
     /// Fetches MusicBrainz details for recordings, including artists, canonical release, tags, and links.
     ///
     /// - Parameter mbids: Up to 1000 MusicBrainz recording IDs.
