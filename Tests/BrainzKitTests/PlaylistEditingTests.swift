@@ -65,4 +65,19 @@ import BrainzKit
         }
         #expect(sent == mbids.map { "https://musicbrainz.org/recording/\($0)" })
     }
+
+    @Test func servicePlaylistsReadEachServicesFormat() async throws {
+        let server = FakeListenBrainz(body: """
+        [
+          {"id": "37i9dQZF1DXcBWIGoYBM5M", "name": "Today's Top Hits", "tracks": {"total": 50}},
+          {"id": "p.YJXV7Q9fRvLzZ", "type": "library-playlists", "attributes": {"name": "Road Trip"}},
+          {"id": 1234567, "title": "Late Night Mix", "kind": "playlist"}
+        ]
+        """)
+
+        let playlists = try await server.manager().servicePlaylists(on: .spotify)
+
+        #expect(playlists.map(\.id) == ["37i9dQZF1DXcBWIGoYBM5M", "p.YJXV7Q9fRvLzZ", "1234567"])
+        #expect(playlists.map(\.name) == ["Today's Top Hits", "Road Trip", "Late Night Mix"])
+    }
 }

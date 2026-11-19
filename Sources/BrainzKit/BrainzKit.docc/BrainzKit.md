@@ -121,6 +121,13 @@ try await manager.submitListen(
 - ``BZKManager/removeTracks(fromPlaylist:at:count:)``
 - ``BZKManager/copyPlaylist(id:)``
 - ``BZKManager/deletePlaylist(id:)``
+- ``BZKManager/playlistXSPF(id:includeTrackMetadata:)``
+- ``BZKManager/servicePlaylists(on:)``
+- ``BZKManager/importPlaylist(_:from:)``
+- ``BZKManager/exportPlaylist(id:to:isPublic:)``
+- ``BZKManager/exportPlaylist(title:recordingMBIDs:to:isPublic:)``
+- ``BZKMusicService``
+- ``BZKServicePlaylist``
 - ``BZKPlaylist``
 - ``BZKPlaylistTrack``
 - ``BZKPlaylistPage``
