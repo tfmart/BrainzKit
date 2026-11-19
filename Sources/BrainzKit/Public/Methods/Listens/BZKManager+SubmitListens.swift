@@ -12,6 +12,8 @@ public extension BZKManager {
     ///
     /// Submit a listen once the user has listened to half the track or four minutes of it, whichever comes first.
     ///
+    /// When this method returns, ListenBrainz has accepted the listen. It can take a few minutes to appear in the user's listen history.
+    ///
     /// - Parameter listen: The listen to submit.
     /// - Throws: ``BZKClientError/missingToken`` if no user is signed in, or ``BZKError`` if ListenBrainz rejects the listen.
     func submitListen(_ listen: BZKListenSubmission) async throws {
@@ -34,6 +36,8 @@ public extension BZKManager {
     }
 
     /// Submits listens that happened in the past, such as listens recorded while offline.
+    ///
+    /// When this method returns, ListenBrainz has accepted the listens. They can take a few minutes to appear in the user's listen history.
     ///
     /// - Parameter listens: Between 1 and 1000 listens.
     /// - Throws: ``BZKClientError/noListens`` or ``BZKClientError/tooManyListens`` if the count is out of range, ``BZKClientError/missingToken`` if no user is signed in, or ``BZKError`` if ListenBrainz rejects the listens.
