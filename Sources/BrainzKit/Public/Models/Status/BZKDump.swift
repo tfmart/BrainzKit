@@ -31,17 +31,18 @@ public struct BZKDump: Sendable, Hashable, Decodable, Identifiable {
     }
 
     static func date(fromDumpTimestamp timestamp: String) -> Date? {
-        let digits = timestamp.filter(\.isNumber)
-        guard digits.count == 14, let value = Int(digits) else { return nil }
+        let digits = Array(timestamp.filter(\.isNumber))
+        guard digits.count == 14 else { return nil }
+        func number(_ range: Range<Int>) -> Int? { Int(String(digits[range])) }
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? .current
         let components = DateComponents(
-            year: value / 10_000_000_000,
-            month: value / 100_000_000 % 100,
-            day: value / 1_000_000 % 100,
-            hour: value / 10_000 % 100,
-            minute: value / 100 % 100,
-            second: value % 100
+            year: number(0..<4),
+            month: number(4..<6),
+            day: number(6..<8),
+            hour: number(8..<10),
+            minute: number(10..<12),
+            second: number(12..<14)
         )
         return calendar.date(from: components)
     }
