@@ -80,6 +80,13 @@ try await manager.submitListen(
 - ``BZKManager/collaborativePlaylists(forUser:count:offset:)``
 - ``BZKManager/recommendedPlaylists(forUser:)``
 - ``BZKManager/searchPlaylists(_:forUser:count:offset:)``
+- ``BZKManager/createPlaylist(title:description:isPublic:collaborators:recordingMBIDs:)``
+- ``BZKManager/editPlaylist(id:title:description:isPublic:collaborators:)``
+- ``BZKManager/addTracks(_:toPlaylist:at:)``
+- ``BZKManager/moveTracks(inPlaylist:from:to:count:recordingMBID:)``
+- ``BZKManager/removeTracks(fromPlaylist:at:count:)``
+- ``BZKManager/copyPlaylist(id:)``
+- ``BZKManager/deletePlaylist(id:)``
 - ``BZKPlaylist``
 - ``BZKPlaylistTrack``
 - ``BZKPlaylistPage``
