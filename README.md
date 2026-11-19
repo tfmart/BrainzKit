@@ -14,6 +14,7 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 - Year in Music summaries, an artist's or album's top listeners, and how similar two users' tastes are
 - Listen and listener counts for any artist, recording, or album, and an artist's most played tracks and albums
 - Search, follow, and find similar users
+- Read a user's feed, recommend tracks to followers, and post CritiqueBrainz reviews
 - Match artist and track names to MusicBrainz recordings, and fix wrong matches
 - Genres, tags, release details, and streaming links for recordings, artists, and albums
 

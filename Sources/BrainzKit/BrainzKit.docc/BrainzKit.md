@@ -104,6 +104,23 @@ try await manager.submitListen(
 - ``BZKPlaylistTrack``
 - ``BZKPlaylistPage``
 
+### Feed
+
+- ``BZKManager/feedEvents(before:after:count:)``
+- ``BZKManager/feedListensFromFollowing(before:after:count:)``
+- ``BZKManager/feedListensFromSimilarUsers(before:after:count:)``
+- ``BZKManager/recommendToFollowers(_:)``
+- ``BZKManager/recommend(_:to:message:)``
+- ``BZKManager/postReview(_:of:named:type:language:rating:)``
+- ``BZKManager/hideFeedEvent(id:kind:)``
+- ``BZKManager/unhideFeedEvent(id:kind:)``
+- ``BZKManager/deleteFeedEvent(id:kind:)``
+- ``BZKFeedEvent``
+- ``BZKFeedEventKind``
+- ``BZKFeedEventContent``
+- ``BZKFeedReview``
+- ``BZKReviewEntityType``
+
 ### Statistics
 
 - ``BZKManager/topArtists(for:range:count:offset:)``
