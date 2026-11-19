@@ -4,7 +4,7 @@ Submit listens to ListenBrainz and read listening history, feedback, and statist
 
 ## Overview
 
-BrainzKit wraps the [ListenBrainz API](https://listenbrainz.readthedocs.io/en/latest/users/api/index.html) in a single actor, ``BZKManager``. Every call is `async`, every model is `Sendable`, and the package builds with Swift 6 strict concurrency checking.
+BrainzKit wraps the [ListenBrainz API](https://listenbrainz.readthedocs.io/en/latest/users/api/index.html). Everything goes through ``BZKManager``: create one with your app's details, sign the user in with their ListenBrainz token, and call its methods.
 
 ```swift
 import BrainzKit
