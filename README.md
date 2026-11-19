@@ -8,7 +8,7 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 - Read a user's listens, listen count, and now playing track
 - Love and hate recordings, and read feedback
 - Personalized track recommendations, and ratings that tune them
-- Fresh releases, releases by cover art color, and LB Radio playlists from prompts like `artist:(Daft Punk)`
+- Fresh releases (sitewide or from artists a user listens to), releases by cover art color, and LB Radio playlists from prompts like `artist:(Daft Punk)`
 - Pin a recording to a profile, and read pins from a user or the people they follow
 - Browse, search, create, and edit playlists, including the ones ListenBrainz generates for each user
 - Top artists, releases, albums, and recordings, listening activity, listening heatmaps, and artist countries, for a user or the whole site
@@ -19,6 +19,7 @@ A Swift package for the [ListenBrainz](https://listenbrainz.org) API. Submit lis
 - Read a user's feed, recommend tracks to followers, and post CritiqueBrainz reviews
 - Match artist and track names to MusicBrainz recordings, and fix wrong matches
 - Export a user's data as a ZIP archive, and track import progress from other services
+- Update account settings like time zone and flair, and check service status and donors
 - Genres, tags, release details, and streaming links for recordings, artists, and albums
 
 ## Requirements

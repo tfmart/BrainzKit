@@ -77,6 +77,7 @@ try await manager.submitListen(
 ### Explore
 
 - ``BZKManager/freshReleases(days:around:sort:includePast:includeFuture:)``
+- ``BZKManager/freshReleases(forUser:days:sort:includePast:includeFuture:)``
 - ``BZKManager/releases(matchingColor:count:)``
 - ``BZKManager/radio(prompt:mode:)``
 - ``BZKManager/radioRecordings(forArtist:mode:maxSimilarArtists:maxRecordingsPerArtist:popularity:)``
@@ -241,6 +242,26 @@ try await manager.submitListen(
 - ``BZKManager/setLatestImport(_:service:)``
 - ``BZKDataExport``
 - ``BZKDataExportStatus``
+
+### Settings
+
+- ``BZKManager/setTimeZone(_:)``
+- ``BZKManager/setFlair(_:)``
+- ``BZKManager/setExportsGeneratedPlaylistsToSpotify(_:)``
+- ``BZKManager/setBrainzPlayerPreferences(_:)``
+- ``BZKFlair``
+- ``BZKBrainzPlayerPreferences``
+
+### Service Status and Donors
+
+- ``BZKManager/serviceStatus()``
+- ``BZKManager/generatedPlaylistStatus()``
+- ``BZKManager/recentDonors(count:offset:)``
+- ``BZKManager/biggestDonors(count:offset:)``
+- ``BZKManager/donorFlairs()``
+- ``BZKServiceStatus``
+- ``BZKDataAge``
+- ``BZKDonor``
 - ``BZKManager/dump(id:)``
 - ``BZKDump``
 

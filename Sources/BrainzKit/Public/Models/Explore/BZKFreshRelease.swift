@@ -29,6 +29,8 @@ public struct BZKFreshRelease: Sendable, Hashable, Decodable {
     public let tags: [String]
     /// The release's cover art, if available.
     public let coverArt: BZKCoverArt?
+    /// How well the release matches the user's listening, present in a user's personal fresh releases. Higher is a better match.
+    public let confidence: Int?
 
     enum CodingKeys: String, CodingKey {
         case releaseName = "release_name"
@@ -42,6 +44,7 @@ public struct BZKFreshRelease: Sendable, Hashable, Decodable {
         case tags = "release_tags"
         case caaID = "caa_id"
         case caaReleaseMBID = "caa_release_mbid"
+        case confidence
     }
 
     public init(from decoder: any Decoder) throws {
@@ -55,6 +58,7 @@ public struct BZKFreshRelease: Sendable, Hashable, Decodable {
         type = try container.decodeIfPresent(String.self, forKey: .type)
         listenCount = try container.decodeIfPresent(Int.self, forKey: .listenCount)
         tags = (try? container.decodeIfPresent([String].self, forKey: .tags)) ?? []
+        confidence = try container.decodeIfPresent(Int.self, forKey: .confidence)
         coverArt = BZKCoverArt(
             releaseMBID: try container.decodeIfPresent(String.self, forKey: .caaReleaseMBID),
             id: try container.decodeIfPresent(Int.self, forKey: .caaID)

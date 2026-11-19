@@ -39,6 +39,35 @@ public extension BZKManager {
         return response.payload.releases
     }
 
+    /// Fetches recent and upcoming releases from artists a user listens to.
+    ///
+    /// - Parameters:
+    ///   - userName: The ListenBrainz user name.
+    ///   - days: How many days around today to include, up to 90.
+    ///   - sort: How to order the releases.
+    ///   - includePast: Whether to include releases before today.
+    ///   - includeFuture: Whether to include releases after today.
+    /// - Returns: The releases, each with a ``BZKFreshRelease/confidence`` score.
+    func freshReleases(
+        forUser userName: String,
+        days: Int = 14,
+        sort: BZKFreshReleaseSort = .releaseDate,
+        includePast: Bool = true,
+        includeFuture: Bool = true
+    ) async throws -> [BZKFreshRelease] {
+        let request = BZKRequest(
+            path: "user/\(BZKRequest.segment(userName))/fresh_releases",
+            queryItems: BZKRequest.query([
+                "days": String(days),
+                "sort": sort.rawValue,
+                "past": includePast ? "true" : "false",
+                "future": includeFuture ? "true" : "false"
+            ])
+        )
+        let response: BZKPayloadResponse<BZKFreshReleasesPayload> = try await perform(request)
+        return response.payload.releases
+    }
+
     /// Finds releases whose cover art matches a color.
     ///
     /// - Parameters:
